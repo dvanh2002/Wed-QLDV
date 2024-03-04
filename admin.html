@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Quản lí công đoàn</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<div id="navbar"></div>
+<div class="container">
+    <h1 class="title">Danh sách đoàn viên</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUnion">Thêm đoàn
+        viên
+    </button>
+    <a href="index.html" class="btn btn-primary mb-3">Tra cứu đoàn viên</a>
+
+    <!--    <div id="modal-add-union"></div>-->
+    <!-- Modal -->
+    <div class="modal fade" id="addUnion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới đoàn viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-add-union-member">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" name="birthday">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Giới tính</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value="1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Nam
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value="0">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">CMND/CCCD</label>
+                                    <input type="text" class="form-control" name="cmnd">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày vào đoàn</label>
+                                    <input type="date" class="form-control" name="createDate">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Hình ảnh</label>
+                                    <input type="file" id="files" class="form-control" name="files[]"/>
+                                    <input type="hidden" name="image">
+                                </div>
+                                <!-- lightbox -->
+                                <div class="overlay">
+                                    <div class="output"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="add-union-member">Thêm mới</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateUnion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật đoàn viên</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-update-union-member">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" name="birthday">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Giới tính</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault11" value="1" checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Nam
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault12" value="0">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Nữ
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">CMND/CCCD</label>
+                                    <input type="text" class="form-control" name="cmnd">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Ngày vào đoàn</label>
+                                    <input type="date" class="form-control" name="createDate">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Hình ảnh</label>
+                                    <input type="file" id="files-update" class="form-control" name="files[]"/>
+                                    <input type="hidden" name="image">
+                                </div>
+                                <!-- lightbox -->
+                                <div class="overlay">
+                                    <div class="output-update"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="update-union-member">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered mb-5">
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>Họ và tên</td>
+            <td>Hình ảnh</td>
+            <td>Ngày sinh</td>
+            <td>Giới tính</td>
+            <td>CMND/CCCD</td>
+            <td>Ngày vào đoàn</td>
+            <td>Trạng thái</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody id="list-union"></tbody>
+    </table>
+</div>
+<div class="footer"></div>
+</body>
+<script src="./js/main.js"></script>
+</html>
+<script>
+
+    var sessionLogin = localStorage.getItem('isLogin');
+
+    if (! sessionLogin) {
+        window.location.href = './index.html'
+    }
+
+    var img2data = (function () {
+        'use strict';
+        return {
+            // this.qS(foo)
+            qS: function (el) {
+                return document.querySelector(el);
+            },
+            run: function () {
+                this.convert();
+            },
+            convert: function () {
+                // vars
+                var fls = this.qS('#files-update'),
+                    output = this.qS('.output-update');
+
+                fls.addEventListener('change', function (e) {
+                    var file = fls.files[0],
+                        imgType = /image.*/, // all image files
+                        fR = new FileReader(); // fileReader start
+
+                    fR.onload = function (e) {
+                        // if text
+                        if (file.type.match(imgType)) {
+                            var rS2 = fR.result,
+                                // template
+                                tmpl = '<img class="img img-fluid" src="' + rS2 + '" alt="' + file.name + '" width="100px">'
+                            $('input[name="image"]').val(rS2)
+                            output.innerHTML = tmpl;
+                            // if not support
+                        }
+                    };
+
+                    // convert to data uri
+                    fR.readAsDataURL(file);
+                });
+
+                var fls_s = this.qS('#files'),
+                    output_s = this.qS('.output');
+
+                fls_s.addEventListener('change', function (e) {
+                    var file = fls_s.files[0],
+                        imgType = /image.*/, // all image files
+                        fR = new FileReader(); // fileReader start
+
+                    fR.onload = function (e) {
+                        // if text
+                        if (file.type.match(imgType)) {
+                            var rS2 = fR.result,
+                                // template
+                                tmpl = '<img class="img img-fluid" src="' + rS2 + '" alt="' + file.name + '" width="100px">'
+                            $('input[name="image"]').val(rS2)
+                            output_s.innerHTML = tmpl;
+                            // if not support
+                        }
+                    };
+
+                    // convert to data uri
+                    fR.readAsDataURL(file);
+                });
+            }
+        };
+    })();
+
+    img2data.run();
+</script>
